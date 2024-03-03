@@ -1,5 +1,6 @@
 "use client"
 import React, {useState, useEffect} from 'react'
+import styles from './Timer.module.css'; // Import the CSS module
 
 
 const MODES = {
@@ -7,7 +8,6 @@ const MODES = {
     SHORT_BREAK: { time: 5 * 60, color: 'lightblue' },
     LONG_BREAK: { time: 15 * 60, color: 'lightgreen' },
   };
-
 
   const Timer:React.FC = () => {
     const [timeLeft, setTimeLeft] = useState<number>(MODES.POMODORO.time);
@@ -72,19 +72,23 @@ const MODES = {
         setTimeLeft(25*60)
     }
 
-  return (
-    <div style={pageStyle}>
-      <h2>Timer</h2>
-      <div>
-        <p>Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}</p>
-      </div>
-      <button onClick={toggle}>{isActive ? 'Pause' : 'Start'}</button>
-      <button onClick={reset}>Reset</button>
-      <button onClick={() => changeMode('POMODORO')}>Pomodoro</button>
-      <button onClick={() => changeMode('SHORT_BREAK')}>Short Break</button>
-      <button onClick={() => changeMode('LONG_BREAK')}>Long Break</button>
-    </div> 
-  );
+    return (
+        <div className={styles.timerContainer} style={{ backgroundColor: currentMode.color }}>
+          <h1>PomoWHATEVER</h1>
+          <div className={styles.modeButtons}>
+            <button className={styles.button} onClick={() => changeMode('POMODORO')}>Pomodoro</button>
+            <button className={styles.button} onClick={() => changeMode('SHORT_BREAK')}>Short Break</button>
+            <button className={styles.button} onClick={() => changeMode('LONG_BREAK')}>Long Break</button>
+          </div>
+          <div className={styles.timerDisplay}>
+            <p>{Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}</p>
+          </div>
+          <div className={styles.controlButtons}>
+            <button className={styles.button} onClick={toggle}>{isActive ? 'Pause' : 'Start'}</button>
+            <button className={styles.button} onClick={reset}>Reset</button>
+          </div>
+        </div> 
+      );
 };
 
 
