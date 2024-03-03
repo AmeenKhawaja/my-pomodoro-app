@@ -1,0 +1,8 @@
+/* components/NavBar.module.css */
+.navbar {
+    background-color: #ffffff;
+    color: rgb(200, 26, 26);
+    padding: 1rem;
+    /* Add other styles for your navbar */
+  }
+  
